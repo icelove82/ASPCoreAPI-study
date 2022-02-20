@@ -18,7 +18,12 @@ namespace ASPCoreAPI_study.Controllers
             _logger = logger;
         }
 
-        [HttpGet(Name = "GetWeatherForecast")]
+        /* type 1
+        [HttpGet]
+        [Route("weather")]*/
+
+        /* type 2 */
+        [HttpGet("myweather")]
         public IEnumerable<WeatherForecast> Get()
         {
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
