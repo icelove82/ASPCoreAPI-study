@@ -10,7 +10,7 @@ namespace ASPCoreAPI_study.Controllers
         [HttpGet]
         public async Task<ActionResult<List<SuperHero>>> Get()
         {
-            var heros = new List<SuperHero>()
+            var heros = new List<SuperHero>
             {
                 new SuperHero{
                     Id=1,
