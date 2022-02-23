@@ -7,7 +7,7 @@ namespace ASPCoreAPI_study.Controllers
     [Route("api/[controller]")]
     public class SuperHeroController : ControllerBase
     {
-        private List<SuperHero> heros = new List<SuperHero>
+        private List<SuperHero> HEROS_DATA = new List<SuperHero>
         {
             new SuperHero{
                 Id=1,
@@ -28,14 +28,14 @@ namespace ASPCoreAPI_study.Controllers
         [HttpGet]
         public async Task<ActionResult<List<SuperHero>>> GetHeros()
         {
-            return Ok(heros);
+            return Ok(HEROS_DATA);
         }
 
 
         [HttpGet("{id}")]
         public async Task<ActionResult<SuperHero>> GetHero(int id)
         {
-            var hero = heros.Find(it => it.Id == id);
+            var hero = HEROS_DATA.Find(it => it.Id == id);
 
             if (hero == null)
                 return BadRequest("Hero not found.");
@@ -46,14 +46,14 @@ namespace ASPCoreAPI_study.Controllers
         [HttpPost]
         public async Task<ActionResult<List<SuperHero>>> AddHero(SuperHero hero)
         {
-            heros.Add(hero);
-            return Ok(heros);
+            HEROS_DATA.Add(hero);
+            return Ok(HEROS_DATA);
         }
 
         [HttpPut]
         public async Task<ActionResult<List<SuperHero>>> UpdateHero(SuperHero request)
         {
-            var hero = heros.Find(it => it.Id == request.Id);
+            var hero = HEROS_DATA.Find(it => it.Id == request.Id);
 
             if (hero == null)
                 return BadRequest("Hero not found.");
@@ -64,7 +64,20 @@ namespace ASPCoreAPI_study.Controllers
             hero.LastName = request.LastName;
             hero.Place = request.Place;
 
-            return Ok(heros);
+            return Ok(HEROS_DATA);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<List<SuperHero>>> DeleteHero(int id)
+        {
+            var hero = HEROS_DATA.Find(it => it.Id == id);
+
+            if (hero == null)
+                return BadRequest("Hero not found.");
+
+            HEROS_DATA.Remove(hero);
+
+            return Ok(HEROS_DATA);
         }
     }
 }
