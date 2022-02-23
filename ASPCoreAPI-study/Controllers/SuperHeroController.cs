@@ -50,5 +50,21 @@ namespace ASPCoreAPI_study.Controllers
             return Ok(heros);
         }
 
+        [HttpPut]
+        public async Task<ActionResult<List<SuperHero>>> UpdateHero(SuperHero request)
+        {
+            var hero = heros.Find(it => it.Id == request.Id);
+
+            if (hero == null)
+                return BadRequest("Hero not found.");
+
+            hero.Id = request.Id;
+            hero.Name = request.Name;
+            hero.FirstName = request.FirstName;
+            hero.LastName = request.LastName;
+            hero.Place = request.Place;
+
+            return Ok(heros);
+        }
     }
 }
